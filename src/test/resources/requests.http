@@ -1,0 +1,70 @@
+GET http://localhost:8080/api/tv
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/tv
+Content-Type: application/json
+
+{
+  "title": "my_tvShow"
+}
+
+###
+POST http://localhost:8080/api/tv
+Content-Type: application/json
+
+{
+  "title": "my_tvShow"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 409, "Response status is not 409");
+});
+
+%}
+
+###
+POST http://localhost:8080/api/tv
+Content-Type: application/json
+
+{
+  "title": ""
+}
+
+###
+GET http://localhost:8080/api/tv/1
+
+###
+GET http://localhost:8080/api/tv/42
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 404, "Response status is not 404");
+});
+
+%}
+###
+DELETE http://localhost:8080/api/tv
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not 204");
+});
+
+%}
+
+###
+DELETE http://localhost:8080/api/tv/1
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not 204");
+});
+
+%}
