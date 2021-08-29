@@ -2,16 +2,16 @@ package io.chillplus.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 public class CreateTvShowRequest {
     final Long id;
 
-    @NotEmpty
+    @NotBlank
     final String title;
 
     @JsonCreator
-    public CreateTvShowRequest(final Long id, @NotEmpty final String title) {
+    public CreateTvShowRequest(final Long id, @NotBlank final String title) {
         this.id = id;
         this.title = title;
     }
