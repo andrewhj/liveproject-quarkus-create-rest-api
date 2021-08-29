@@ -14,6 +14,12 @@ Content-Type: application/json
   "title": "my_tvShow"
 }
 
+> {%
+ client.test("Request executed successfully", function() {
+ client.assert(response.status === 201, "Response status is not 201");
+ });
+ %}
+
 ###
 POST http://localhost:8080/api/tv
 Content-Type: application/json
@@ -37,6 +43,15 @@ Content-Type: application/json
   "title": ""
 }
 
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 400, "Response status is not 400");
+    var violation = response.body.parameterViolations[0];
+    client.assert(violation.path === "create.newShow.title", "Expected title parameter");
+    client.assert(violation.message === "must not be blank", "Expected blank error message");
+});
+ %}
+
 ###
 GET http://localhost:8080/api/tv/1
 
@@ -49,6 +64,7 @@ client.test("Request executed successfully", function() {
 });
 
 %}
+
 ###
 DELETE http://localhost:8080/api/tv
 
