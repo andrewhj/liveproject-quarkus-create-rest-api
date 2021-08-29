@@ -16,6 +16,10 @@ public class CreateTvShowRequest {
         this.title = title;
     }
 
+    public CreateTvShowRequest(final String title) {
+        this(null, title);
+    }
+
     public String getTitle() {
         return title;
     }
