@@ -1,0 +1,51 @@
+GET http://{{host}}:{{port}}/api/tv
+Accept: application/json, application/xml
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body === [], "Response body is not empty");
+});
+%}
+
+###
+POST http://{{host}}:{{port}}/api/tv
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "foo1",
+  "category": "bar"
+}
+
+###
+POST http://{{host}}:{{port}}/api/tv
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "foo2"
+}
+
+###
+GET http://{{host}}:{{port}}/api/tv/1
+Accept: application/json
+
+###
+PUT http://{{host}}:{{port}}/api/tv
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 2,
+  "title": "foo2",
+  "category": "baz"
+}
+
+###
+DELETE http://{{host}}:{{port}}/api/tv/1
+Accept: application/json
+
+###
+GET http://{{host}}:{{port}}/api/tv
+Accept: application/json
